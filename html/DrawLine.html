@@ -48,7 +48,7 @@
             render.setSize(width,height);
             //将场景挂载到div下 jQuery的append
             $(".canvas-frame").append(render.domElement);
-            // render.setClearColor(0xfffff,1.0)
+//             render.setClearColor(0xffffff,1.0)
         }
 
         /**
@@ -82,7 +82,7 @@
         let light;
         function initLight() {
             light = new THREE.DirectionalLight(0xFF0000, 1.0, 0);
-            light.position.set(100, 100, 200);
+            light.position.set(100, 500, 100);
             scene.add(light);
         }
 
@@ -91,26 +91,37 @@
          */
         let cube;
         function initObject(){
-            let geometry = new THREE.Geometry();
-            let material = new THREE.LineBasicMaterial( { vertexColors: true} );
-            let color1 = new THREE.Color(0xffffff), color2 = new THREE.Color(0xffffff);
+            //画线
+//            let geometry = new THREE.Geometry();
+//            let material = new THREE.LineBasicMaterial( { vertexColors: true} );
+//            let color1 = new THREE.Color(0xffffff), color2 = new THREE.Color(0xffffff);
+//
+//            // 线的材质可以由2点的颜色决定
+//            let p1 = new THREE.Vector3(-500,0,0);
+//            let p2 = new THREE.Vector3(500,0,0);
+//            geometry.vertices.push(p1);
+//            geometry.vertices.push(p2);
+//            geometry.colors.push(color1, color2);
+//            for(let i=0;i<20;i++){
+//                let line = new THREE.Line(geometry,material, THREE.LineSegments);
+//                line.position.z=(i*50-500);
+//                scene.add(line);
+//
+//                let line2=new THREE.Line(geometry,material, THREE.LineSegments);
+//                line2.position.x=(i*50-500);
+//                line2.rotation.y=90 * Math.PI / 180;ff
+//                scene.add(line2);
+//            }
+            //画圆柱，并它他动起来
+            //顶端半径100 低端半径400 高度150
+            let geometry=new THREE.CylinderGeometry(100,150,400);  //圆柱体模型
+            let material=new THREE.MeshLambertMaterial({color:0xFF6600,wireframe:false});   //兰伯特网孔材料
+            let mesh=new THREE.Mesh(geometry,material); //网孔
 
-            // 线的材质可以由2点的颜色决定
-            let p1 = new THREE.Vector3(-500,0,0);
-            let p2 = new THREE.Vector3(500,0,0);
-            geometry.vertices.push(p1);
-            geometry.vertices.push(p2);
-            geometry.colors.push(color1, color2);
-            for(let i=0;i<20;i++){
-                let line = new THREE.Line(geometry,material, THREE.LineSegments);
-                line.position.z=(i*50-500);
-                scene.add(line);
+            
+            mesh.position.set(0,0,0);
+            scene.add(mesh);
 
-                let line2=new THREE.Line(geometry,material, THREE.LineSegments);
-                line2.position.x=(i*50-500);
-                line2.rotation.y=90 * Math.PI / 180;
-                scene.add(line2);
-            }
 
         }
 
@@ -120,11 +131,18 @@
             initThree();
             initCamera();
             initScene();
-            // initLight();
+             initLight();
             initObject();
-            render.clear();
-            render.render(scene,camera);
+            animation();
+//            render.clear();
+//            render.render(scene,camera);
 
+        }
+
+        function animation(){
+            camera.position.x=camera.position.x+0.5;
+            render.render(scene,camera);
+            requestAnimationFrame(animation);
         }
 
         //文档加载完成之后执行该方法
