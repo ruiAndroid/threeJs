@@ -12,6 +12,9 @@
     <script src="../lib/three.min.js"></script>
     <!--缓动动画库-->
     <script src="../lib/tweenjs.min.js"></script>
+    <!--控制库-->
+    <script src="../lib/TrackballControls.js"></script>
+    <script src="../lib/OrbitControls.js"></script>
     <!--h5屏幕适配-->
     <script type="text/javascript">
         //根据屏幕大小改变根元素字体大小 750为基准
@@ -74,24 +77,56 @@
          * 初始化相机
          */
         let camera;
+        let trackBall;
         function initCamera(){
-            camera=new THREE.PerspectiveCamera();
+            camera=new THREE.PerspectiveCamera(45, width/height, 0.1, 10000);
             camera.position.x = 0;
-            camera.position.y = 1200;
+            camera.position.y = 1000;
             camera.position.z = 1000;
             camera.up.x = 0;
             camera.up.y = 1;
             camera.up.z = 0;        //表示z轴为相机的上方
             //相机的观察点,相机在全局空间中的位置
             camera.lookAt(0,0,0);
+
+            trackBall=new THREE.OrbitControls(camera,render.domElement)
+            /////////OrbitControlls
+            trackBall.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+            trackBall.dampingFactor = 0.5;
+            trackBall.screenSpacePanning = true;
+            trackBall.minDistance = 0;
+            trackBall.maxDistance = 10000;
+            trackBall.maxPolarAngle = Math.PI / 0.1;
+
+            ////////trackballControls
+            //旋转速度
+            // trackBall.rotateSpeed = 2.0;
+            // //变焦速度
+            // trackBall.zoomSpeed = 2.2;
+            // //平移速度
+            // trackBall.panSpeed = 0.8;
+            // //是否不变焦
+            // trackBall.noZoom = false;
+            // //是否不平移
+            // trackBall.noPan = false;
+            // //s是否开启移动惯性
+            // trackBall.staticMoving = true;
+            // //动态阻尼系数，就是灵敏度
+            // trackBall.dynamicDampingFactor = 0.3;
+            // trackBall.keys = [ 65, 83, 68 ];
+            // trackBall.addEventListener( 'change', render );
         }
 
         /**
-         * 初始4441化场景
+         * 初始化场景
          */
         let scene;
+        let clock;
         function initScene(){
+            clock = new THREE.Clock();
             scene=new THREE.Scene();
+            //设置场景的背景颜色
+            scene.background=0xffffff;
 
         }
 
@@ -105,18 +140,20 @@
         function initLight() {
             //点光源
             light = new THREE.SpotLight(0xffffff);
-            light.position.set(-200, 900, 600);
+            light.position.set(-200, 400, 600);
             //显示阴影照相机的位置
 
             //告诉光源产生阴影
             light.castShadow=true;
-            console.log('fuck:',light.shadow.camera.near);
+            // light.shadow.mapSize.width = 1024;
+            // light.shadow.mapSize.height = 1024;
             //设置阴影分辨率
-            // light.shadow.mapSize.width = 2048;
-            // light.shadow.mapSize.height = 2048;
-            light.shadow.camera.near = 2;
-            light.shadow.camera.far = 10;
-            light.shadow.camera.fov = 30;
+
+            // let d = 1;
+            // light.shadow.camera.left = -d;
+            // light.shadow.camera.right = d;
+            // light.shadow.camera.top = d;
+            // light.shadow.camera.bottom = -d;
             scene.add(light);
 
             let sphereSize = 10;
@@ -135,10 +172,41 @@
         }
 
         /**
+         * 初始化纹理
+         * */
+        let bgTexture;
+        let sphereTexture;
+        let cylinderTexture;
+        let coneTexture;
+        function initTexture(){
+            bgTexture=new THREE.TextureLoader().load("../texture/planeBg.jpg");
+            bgTexture.wrapS = THREE.MirroredRepeatWrapping;
+            bgTexture.wrapT = THREE.MirroredRepeatWrapping;
+            bgTexture.repeat.set(1,1);
+
+
+            sphereTexture=new THREE.TextureLoader().load("../texture/wl1.jpg");
+            sphereTexture.wrapS = THREE.MirroredRepeatWrapping;
+            sphereTexture.wrapT = THREE.MirroredRepeatWrapping;
+            sphereTexture.repeat.set(1,1);
+
+            cylinderTexture=new THREE.TextureLoader().load("../texture/wl2.jpg");
+            cylinderTexture.wrapS = THREE.MirroredRepeatWrapping;
+            cylinderTexture.wrapT = THREE.MirroredRepeatWrapping;
+            cylinderTexture.repeat.set(1,1);
+
+            coneTexture=new THREE.TextureLoader().load("../texture/wl3.jpg");
+            coneTexture.wrapS = THREE.MirroredRepeatWrapping;
+            coneTexture.wrapT = THREE.MirroredRepeatWrapping;
+            coneTexture.repeat.set(1,1);
+        }
+        /**
          * 初始化对象
          */
-        let cube;
-        let mesh;
+        let sphereMesh;
+        let cylinderMesh;
+        let coneMesh;
+        let mixer;
         function initObject(){
             //画线
 //            let geometry = new THREE.Geometry();
@@ -194,7 +262,7 @@
 
             //画一个平面
             let circleGeometry=new THREE.CircleGeometry(450,100);
-            let material = new THREE.MeshLambertMaterial( { color: 0xffffff } );
+            let material = new THREE.MeshLambertMaterial( { color: 0xffffff,map:bgTexture,flatShading:true} );
             let mesh=new THREE.Mesh(circleGeometry,material);
             mesh.position.set(0,0,0);
             mesh.rotateX(-Math.PI*0.5);
@@ -206,35 +274,81 @@
             //画一个圆锥体
 
             let coneGeometry= new THREE.ConeGeometry(100, 300, 100 );
-            let coneMaterial = new THREE.MeshLambertMaterial( {color: 0xffff00} );
-            let coneMesh = new THREE.Mesh(coneGeometry, coneMaterial);
+            let coneMaterial = new THREE.MeshLambertMaterial( {color: 0xffffff,map:coneTexture,flatShading:true} );
+            coneMesh = new THREE.Mesh(coneGeometry, coneMaterial);
             coneMesh.castShadow=true;
             coneMesh.position.set(0,150,200);
             scene.add(coneMesh);
 
             //画一个球
-            let sphereGeometry=new THREE.SphereGeometry(50,100,200);
-            let sphereMaterial = new THREE.MeshLambertMaterial( { color: 0x0094ff } );
-            let sphereMesh=new THREE.Mesh(sphereGeometry,sphereMaterial);
+            let sphereGeometry=new THREE.SphereGeometry(100,100,200);
+            let sphereMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff,map:sphereTexture,flatShading:true} );
+            sphereMesh=new THREE.Mesh(sphereGeometry,sphereMaterial);
             //需要计算阴影的物体
             sphereMesh.castShadow=true;
-            sphereMesh.receiveShadow=true;
-            sphereMesh.position.set(-200,50,0);
+            sphereMesh.position.set(-200,100,0);
             scene.add(sphereMesh);
 
             //画一个圆柱
             let cylinderGeometry = new THREE.CylinderGeometry(100,100,160,100);
-            let cylinderMaterial = new THREE.MeshBasicMaterial( {color: 0xff0000} );
-            let cylinderMesh = new THREE.Mesh(cylinderGeometry, cylinderMaterial );
+            let cylinderMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff,map:cylinderTexture,flatShading:true} );
+            cylinderMesh = new THREE.Mesh(cylinderGeometry, cylinderMaterial );
+            cylinderMesh.castShadow=true;
+            cylinderMesh.position.set(0,80,0);
             scene.add(cylinderMesh);
 
+            let modelLoader=new THREE.JSONLoader();
+            mixer = new THREE.AnimationMixer(scene);
 
+            //加载马的模型
+            modelLoader.load("../model/horse.js",(geometry, materials)=>{
+                let material = materials[0];
+                //马儿跑啊
+                material.morphTargets = true;
+
+                let horse = new THREE.Mesh( geometry, materials );
+                horse.position.set( 200, 0, 0 );
+                horse.scale.set(2,2,2);
+
+                horse.matrixAutoUpdate = false;
+                horse.updateMatrix();
+
+
+                scene.add(horse);
+                mixer.clipAction( geometry.animations[ 0 ], horse )
+                    .setDuration( 1 )			// one second
+                    .startAt( - Math.random() )	// random phase (already running)
+                    .play();
+            });
+
+            //加载怪兽的模型
+            modelLoader.load("../model/monster.js",(geometry, materials)=>{
+                let material = materials[0];
+                //马儿跑啊
+                material.morphTargets = true;
+
+                let monster = new THREE.Mesh( geometry, materials );
+                monster.position.set( 280, 0, 0 );
+                monster.rotation.y=-45;
+                // let s = THREE.Math.randFloat( 0.00075, 0.001 );
+                monster.scale.set( 0.1, 0.1, 0.1 );
+
+                monster.matrixAutoUpdate = false;
+                monster.updateMatrix();
+
+
+                scene.add(monster);
+                mixer.clipAction( geometry.animations[ 0 ], monster )
+                    .setDuration( 1 )			// one second
+                    .startAt( - Math.random() )	// random phase (already running)
+                    .play();
+            })
         }
 
         function initTween(){
             createjs.Tween.get(camera.position,{loop:true}).to({x:-400},2000).
-            to({x:0},2000).to({x:400},2000).call(()=>{
-                console.log('sdfsdf');
+            to({x:0},2000).to({x:400},2000).to({x:0},2000).call(()=>{
+
             });
         }
 
@@ -244,8 +358,9 @@
             initCamera();
             initScene();
              initLight();
+            initTexture();
             initObject();
-            initTween();
+            // initTween();
             animation();
 //            render.clear();
            render.render(scene,camera);
@@ -253,12 +368,16 @@
         }
 
         function animation(){
-
             //改变相机的位置,形成动画
-            // mesh.position.x=mesh.position.x+0.5;
+            sphereMesh.rotation.x+=0.1;
+            sphereMesh.rotation.y+=0.1;
+
+            cylinderMesh.rotation.y+=0.1;
+
             render.render(scene,camera);
             requestAnimationFrame(animation);
-
+            trackBall.update(camera);
+            mixer.update(clock.getDelta());
         }
 
         //文档加载完成之后执行该方法
