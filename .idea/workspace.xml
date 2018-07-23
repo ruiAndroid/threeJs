@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07ce97cc-b97e-4984-98b4-58deb71f40fa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/OrbitControls.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/TrackballControls.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/horse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/monster.blend" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/monster.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/monster.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/texture/planeBg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/texture/wl1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/texture/wl2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/texture/wl3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/male/01_-_Default1noCulling.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/male/Male02_dds.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/male/male-02-1noCulling.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/male/orig_02_-_Defaul1noCulling.dds" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html/DrawLine.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/DrawLine.html" afterDir="false" />
     </list>
@@ -30,8 +24,8 @@
       <file leaf-file-name="ThreeDemo.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/ThreeDemo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="851">
-              <caret line="57" column="9" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
+            <state relative-caret-position="506">
+              <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
               <folding>
                 <element signature="n#script#1;n#head#0;n#html#0;n#!!top" />
               </folding>
@@ -42,8 +36,8 @@
       <file leaf-file-name="DrawLine.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/html/DrawLine.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="149" column="21" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
+            <state relative-caret-position="619">
+              <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -59,18 +53,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>canvas-frame</find>
-      <find>0fffff</find>
-      <find>tween</find>
-      <find>ro</find>
-      <find>z</find>
-      <find>rotation</find>
-      <find>fuck</find>
-      <find>sphereTexture</find>
-      <find>camera</find>
-      <find>initTwee</find>
-      <find>contro</find>
-      <find>anim</find>
       <find>trackBall</find>
       <find>initThree</find>
       <find>圆柱</find>
@@ -87,7 +69,20 @@
       <find>horse</find>
       <find>render</find>
       <find>sha</find>
+      <find>div</find>
+      <find>mes</find>
+      <find>平面</find>
+      <find>initLi</find>
+      <find>圆柱体</find>
+      <find>怪兽</find>
       <find>light</find>
+      <find>init</find>
+      <find>initTh</find>
+      <find>initT</find>
+      <find>sphereTexture</find>
+      <find>camer</find>
+      <find>rotation</find>
+      <find>canvas-frame</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -118,7 +113,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="712" />
@@ -128,6 +123,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -144,7 +140,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -159,6 +154,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\threeJS\threeJs\model\male" />
       <recent name="C:\Users\Administrator\Desktop\threeJS\threeJs\model" />
       <recent name="C:\Users\Administrator\Desktop\threeJS\threeJs\lib" />
       <recent name="C:\Users\Administrator\Desktop\threeJS\threeJs\texture" />
@@ -192,27 +188,28 @@
       <workItem from="1532007037053" duration="2680000" />
       <workItem from="1532137155218" duration="7461000" />
       <workItem from="1532153990101" duration="3307000" />
-      <workItem from="1532158146441" duration="3251000" />
+      <workItem from="1532158146441" duration="3850000" />
+      <workItem from="1532310545029" duration="10810000" />
+      <workItem from="1532338232941" duration="2240000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31364000" />
+    <option name="totallyTimeSpent" value="45013000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1932" height="1052" extended-state="6" />
-    <editor active="true" />
+    <frame x="-6" y="-6" width="1932" height="1052" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1296875" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17083333" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -229,6 +226,40 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/html/ThreeDemo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+          <folding>
+            <element signature="n#script#1;n#head#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/DrawLine.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8579">
+          <caret line="373" column="24" lean-forward="true" selection-start-line="373" selection-start-column="24" selection-end-line="373" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/ThreeDemo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="851">
+          <caret line="57" column="9" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
+          <folding>
+            <element signature="n#script#1;n#head#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/DrawLine.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3588">
+          <caret line="156" column="29" lean-forward="true" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/ThreeDemo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="851">
@@ -355,16 +386,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/ThreeDemo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="851">
-          <caret line="57" column="9" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
-          <folding>
-            <element signature="n#script#1;n#head#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/OrbitControls.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -379,10 +400,20 @@
     <entry file="file://$PROJECT_DIR$/model/monster.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/html/ThreeDemo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+          <folding>
+            <element signature="n#script#1;n#head#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/DrawLine.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="149" column="21" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
+        <state relative-caret-position="619">
+          <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
         </state>
       </provider>
     </entry>

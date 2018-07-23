@@ -138,16 +138,22 @@
          */
         let light;
         function initLight() {
-            //点光源
+            //聚光光源
             light = new THREE.SpotLight(0xffffff);
-            light.position.set(-200, 400, 600);
+            light.position.set(0, 800, 0);
             //显示阴影照相机的位置
 
-            //告诉光源产生阴影
-            light.castShadow=true;
+            //告诉光源产生阴影（产生个锤子）
             // light.shadow.mapSize.width = 1024;
             // light.shadow.mapSize.height = 1024;
             //设置阴影分辨率
+            light.castShadow=true;
+            light.shadow.mapSize.width = 2048;
+            light.shadow.mapSize.height = 2048;
+
+            light.shadow.camera.near = 400;
+            light.shadow.camera.far = 2000;
+            light.shadow.camera.fov = 10;
 
             // let d = 1;
             // light.shadow.camera.left = -d;
@@ -156,7 +162,6 @@
             // light.shadow.camera.bottom = -d;
             scene.add(light);
 
-            let sphereSize = 10;
             // //环境光
             // let environmentLilght=new THREE.DirectionalLight(0xFF0000);
             // environmentLilght.position.set(300,500, 500);
@@ -165,6 +170,7 @@
             // scene.add(directionLightHelper);
 
             //点光源辅助
+            let sphereSize = 10;
             let pointLightHelper = new THREE.PointLightHelper(light,sphereSize,0x0094ff);
             scene.add(pointLightHelper);
 
@@ -262,7 +268,7 @@
 
             //画一个平面
             let circleGeometry=new THREE.CircleGeometry(450,100);
-            let material = new THREE.MeshLambertMaterial( { color: 0xffffff,map:bgTexture,flatShading:true} );
+            let material = new THREE.MeshLambertMaterial( { color: 0xffffff} );
             let mesh=new THREE.Mesh(circleGeometry,material);
             mesh.position.set(0,0,0);
             mesh.rotateX(-Math.PI*0.5);
@@ -309,7 +315,7 @@
                 let horse = new THREE.Mesh( geometry, materials );
                 horse.position.set( 200, 0, 0 );
                 horse.scale.set(2,2,2);
-
+                horse.castShadow=true;
                 horse.matrixAutoUpdate = false;
                 horse.updateMatrix();
 
@@ -328,11 +334,11 @@
                 material.morphTargets = true;
 
                 let monster = new THREE.Mesh( geometry, materials );
-                monster.position.set( 280, 0, 0 );
+                monster.position.set( -50, 0, -330 );
                 monster.rotation.y=-45;
                 // let s = THREE.Math.randFloat( 0.00075, 0.001 );
                 monster.scale.set( 0.1, 0.1, 0.1 );
-
+                monster.castShadow=true;
                 monster.matrixAutoUpdate = false;
                 monster.updateMatrix();
 
@@ -342,7 +348,19 @@
                     .setDuration( 1 )			// one second
                     .startAt( - Math.random() )	// random phase (already running)
                     .play();
-            })
+            });
+
+            //通过json加载人物模型
+            modelLoader.load("../model/male/Male02_dds.json",(geometry, materials)=>{
+                let maleMesh=new THREE.Mesh(geometry, materials);
+                maleMesh.position.set( -300, 0, 200 );
+                maleMesh.scale.set(2,2,2);
+                maleMesh.castShadow=true;
+                scene.add(maleMesh);
+
+
+            });
+
         }
 
         function initTween(){
@@ -369,10 +387,10 @@
 
         function animation(){
             //改变相机的位置,形成动画
-            sphereMesh.rotation.x+=0.1;
-            sphereMesh.rotation.y+=0.1;
-
-            cylinderMesh.rotation.y+=0.1;
+            // sphereMesh.rotation.x+=0.1;
+            // sphereMesh.rotation.y+=0.1;
+            //
+            // cylinderMesh.rotation.y+=0.1;
 
             render.render(scene,camera);
             requestAnimationFrame(animation);
